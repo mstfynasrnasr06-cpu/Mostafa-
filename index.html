@@ -385,7 +385,19 @@ chips.forEach(chip => {
 
 searchInput.addEventListener('input', render);
 
-render();
+render();    const API_URL = "https://api.sheetbest.com/sheets/1c27c4b3-44ef-4bc4-ac12-194aedec0812";
+
+    async function fetchSheetProducts() {
+      try {
+        const res = await fetch(API_URL);
+        const data = await res.json();
+        console.log("البيانات المجلوبة من الشيت:", data);
+      } catch (e) {
+        console.error(e);
+      }
+    }
+    fetchSheetProducts();
+  
 </script>
 
 </body>
