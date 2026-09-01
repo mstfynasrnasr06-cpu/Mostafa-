@@ -385,18 +385,27 @@ chips.forEach(chip => {
 
 searchInput.addEventListener('input', render);
 
-render();    const API_URL = "https://api.sheetbest.com/sheets/1c27c4b3-44ef-4bc4-ac12-194aedec0812";
+render()    const API_URL = "https://api.sheetbest.com/sheets/1c27c4b3-44ef-4bc4-ac12-194aedec0812";
 
     async function fetchSheetProducts() {
       try {
         const res = await fetch(API_URL);
         const data = await res.json();
-        console.log("البيانات المجلوبة من الشيت:", data);
+        if (data && data.length > 0) {
+          products = data.map(item => ({
+            title: item.name,
+            price: item.retail || item.wholesale,
+            image: item.image,
+            category: item.category
+          }));
+          render();
+        }
       } catch (e) {
-        console.error(e);
+        console.error("خطأ في جلب البيانات:", e);
       }
     }
     fetchSheetProducts();
+  
   
 </script>
 
